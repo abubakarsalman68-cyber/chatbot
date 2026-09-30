@@ -1,15 +1,19 @@
 """Request and response models shared by the API routes."""
 
-from typing import Literal
+from typing import Literal, Union
 
 from pydantic import BaseModel, Field
 
 Role = Literal["system", "user", "assistant"]
 
+class ChatContentPart(BaseModel):
+    type: Literal["text", "image_url"]
+    text: str | None = None
+    image_url: str | None = None
 
 class ChatMessage(BaseModel):
     role: Role
-    content: str = Field(max_length=200_000)
+    content: Union[str, list[ChatContentPart]] = Field(max_length=200_000)
 
 
 class ChatRequest(BaseModel):

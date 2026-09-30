@@ -5,6 +5,7 @@ import {
   CheckIcon,
   CopyIcon,
   HardDriveIcon,
+  MicIcon,
   CloudIcon,
   RefreshCwIcon,
   ThumbsDownIcon,
@@ -92,11 +93,31 @@ export function Message({
   if (message.role === "user") {
     return (
       <div className="group flex flex-col items-end gap-1">
-        <div className="max-w-[85%] rounded-3xl bg-secondary px-4 py-2.5 text-[15px] leading-7 break-words whitespace-pre-wrap">
+        <div className="max-w-[85%] rounded-3xl bg-secondary p-3 text-[15px] leading-7 break-words whitespace-pre-wrap">
+          {message.attachments && message.attachments.length > 0 && (
+            <div className="mb-2 flex flex-wrap gap-2">
+              {message.attachments.map((a) => (
+                <img
+                  key={a.url}
+                  src={a.url}
+                  alt="Attachment"
+                  className="max-h-48 rounded-lg object-cover border bg-background"
+                />
+              ))}
+            </div>
+          )}
           {message.content}
         </div>
-        <div className="opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100 [@media(hover:none)]:opacity-100">
-          <CopyAction text={message.content} />
+        <div className="flex items-center gap-1">
+          {message.voice && (
+            <span className="flex items-center gap-1 px-1 text-xs text-muted-foreground">
+              <MicIcon className="size-3" />
+              Spoken
+            </span>
+          )}
+          <div className="opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100 [@media(hover:none)]:opacity-100">
+            <CopyAction text={message.content} />
+          </div>
         </div>
       </div>
     );

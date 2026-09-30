@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     environment: str = "development"
     log_level: str = "INFO"
     cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:3000"])
+    upload_dir: str = "uploads"
     system_prompt: str = (
         "You are a helpful, accurate and concise AI assistant. "
         "Use Markdown for structure when it helps readability."
@@ -53,6 +54,14 @@ class Settings(BaseSettings):
     meta_api_key: SecretStr | None = None
     meta_base_url: str = "https://api.llama.com/compat/v1/"
     meta_model: str = ""
+
+    # Voice mode (LiveKit)
+    livekit_url: str | None = None
+    livekit_api_key: SecretStr | None = None
+    livekit_api_secret: SecretStr | None = None
+    voice_agent_name: str | None = None
+    voice_agent_token: SecretStr | None = None
+    voice_voices: list[dict] = Field(default_factory=lambda: [])
 
 
 @lru_cache

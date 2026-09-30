@@ -23,6 +23,8 @@ export const viewport: Viewport = {
   ],
 };
 
+import { Providers } from "@/components/providers";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -31,12 +33,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="font-sans">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <TooltipProvider>
-            {children}
-            <Toaster position="bottom-center" />
-          </TooltipProvider>
-        </ThemeProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

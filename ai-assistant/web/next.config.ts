@@ -7,7 +7,7 @@ const API_URL = process.env.API_URL ?? "http://localhost:8000";
 const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
-  devindicator:false,
+  devIndicator:false,
   
   // Compression would buffer the chat event stream; let your proxy/CDN compress instead.
   compress: false,
